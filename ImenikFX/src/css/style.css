@@ -1,0 +1,579 @@
+.anchorPage {
+	
+}
+
+.vBox {
+	-fx-pref-height: 720.0;
+	-fx-pref-width: 250.0; 
+	-fx-background-color: #001b2c;
+	-fx-border-width: 0 3 0 0;
+	-fx-border-color: #b0e123;
+}
+
+.panes {
+	-fx-background-color: #001b2c;
+	-fx-pref-height: 720.0;
+	-fx-pref-width: 1030.0; 
+}
+
+
+.message{
+    -fx-background-color: #003355;
+    -fx-border-style: hidden solid solid solid;
+    -fx-border-color: #b0e123;
+  	-fx-border-width: 2.0;
+}
+
+.message > *.button-bar > *.container{
+    -fx-background-color: #003355;
+}
+
+.message > *.label.content{
+    -fx-font-size: 14.0;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.message:header *.header-panel{
+    -fx-background-color: #003355;
+}
+
+.message:header *.header-panel *.label{
+    -fx-font-size: 16.0;
+    -fx-font-style: italic;
+    -fx-text-fill: white;
+}
+
+.message .button {
+	-fx-font-weight: bold;
+	-fx-background-color: #b0e123;
+	-fx-background-radius: 10.0;
+	-fx-text-fill: #001b2c;
+}
+
+.message .button:hover {
+	-fx-background-color: #001b2c;
+	-fx-text-fill: #b0e123;
+	-fx-border-radius: 10.0;
+	-fx-cursor: hand;
+}
+
+
+/* VBOX */
+.buttonHome {
+	-fx-alignment: CENTER;
+	-fx-pref-height: 100.0;
+	-fx-pref-width: 250.0; 
+	-fx-background-color: #001b2c;
+	-fx-text-fill: #b0e123;
+	-fx-border-color: #b0e123;
+	-fx-border-width: 0 0 0 3;
+	-fx-font-size: 30pt;
+	-fx-font-weight: bold;
+	-fx-font-family: 'Courier New';
+	-fx-background-image: url(/images/imgHome.png);
+	-fx-background-size: 60px 60px; 
+    -fx-background-repeat: no-repeat; 
+    -fx-background-position: 15%; 
+    -fx-padding: 0 0 0 50.0;
+}
+
+.buttonHome:hover {
+	-fx-background-color: #b0e123;
+	-fx-text-fill: #001b2c;
+	-fx-cursor: hand;
+	-fx-background-image: url(/images/imgHomeHover.png);
+}
+
+.buttonHome:pressed {
+	-fx-background-color : #002F4D;
+}
+
+.buttonsMenu {
+	-fx-alignment: CENTER;
+	-fx-pref-height: 100.0;
+	-fx-pref-width: 250.0; 
+	-fx-background-color: #001b2c;
+	-fx-text-fill: #b0e123;
+	-fx-border-color: #b0e123;
+	-fx-border-width: 0 0 0 3;
+	-fx-font-size: 30pt;
+	-fx-font-weight: bold;
+	-fx-font-family: 'Courier New';
+	-fx-padding: 0 0 0 50.0;
+}
+
+.buttonMenuUser {
+	-fx-background-image: url(/images/imgUser.png);
+	-fx-background-size: 40px 40px; 
+    -fx-background-repeat: no-repeat; 
+    -fx-background-position: 15%;
+}
+
+.buttonMenuUser:hover {
+	-fx-background-color: #b0e123;
+	-fx-text-fill: #001b2c;
+	-fx-cursor: hand;
+	-fx-background-image: url(/images/imgUserHover.png);
+}
+
+.buttonMenuAdmin {
+	-fx-background-image: url(/images/imgAdmin.png);
+	-fx-background-size: 40px 40px; 
+    -fx-background-repeat: no-repeat; 
+    -fx-background-position: 15%;
+}
+
+.buttonMenuAdmin:hover {
+	-fx-background-color: #b0e123;
+	-fx-text-fill: #001b2c;
+	-fx-cursor: hand;
+	-fx-background-image: url(/images/imgAdminHover.png);
+}
+
+.buttonsMenu:hover {
+	-fx-background-color: #b0e123;
+	-fx-text-fill: #001b2c;
+	-fx-cursor: hand;
+}
+
+.buttonsMenu:pressed {
+	-fx-background-color : #002F4D;
+}
+
+/* 
+ * HOME PANE
+ */
+.welcome {
+	-fx-pref-height: 150;
+	-fx-pref-width: 500;
+	-fx-alignment: center;
+	-fx-text-fill: WHITE;
+	-fx-font-size: 56pt;
+	-fx-font-weight: bold;
+	-fx-font-family: 'Tahoma';
+	
+}
+
+.checkConn {
+	
+	-fx-alignment: baseline-center;
+	-fx-pref-height: 40.0;
+	-fx-pref-width: 180.0; 
+	-fx-background-color: #b0e123;
+	-fx-text-fill: #001b2c;
+	-fx-font-size: 12pt;
+	-fx-font-weight: bold;
+	-fx-font-family: 'Courier New';
+	-fx-background-radius: 10.0;
+
+}
+
+.checkConn:hover {
+	-fx-background-color: #001b2c;
+	-fx-text-fill: #b0e123;
+	-fx-border-color: #b0e123;
+	-fx-border-width: 2.0;
+	-fx-border-radius: 10.0;
+	-fx-cursor: hand;
+}
+
+.checkConn:pressed {
+	-fx-background-color : #002F4D;
+}
+
+/* 
+ * PANE USER
+ */
+.labelsUser {
+	-fx-alignment: baseline-left;
+	-fx-pref-height: 50.0;
+	-fx-pref-width: 200.0; 
+	-fx-text-fill: WHITE;
+	-fx-font-size: 14pt;
+	-fx-font-weight: bold;
+	
+}
+
+.textFieldUser {
+	-fx-pref-height: 50.0;
+	-fx-pref-width: 200.0; 
+	-fx-text-fill: WHITE;
+	-fx-font-family: 'Arial';
+	-fx-font-size: 14pt;
+	-fx-background-color: #00406A;
+}
+
+.textFieldUser:focused {
+    -fx-effect: dropshadow(three-pass-box, rgb(176, 225, 35), 5, 0.6, 0, 0);
+}
+
+.cmbUser {
+	-fx-pref-height: 50.0;
+	-fx-pref-width: 200.0; 
+	-fx-text-fill: WHITE;
+	-fx-background-color: #00406A;
+	-fx-font-family: 'Arial';
+	-fx-font-size: 14pt;
+	-fx-cursor: hand;
+}
+
+.cmbUser .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell {
+    -fx-background-color: #00406A;
+    -fx-text-fill: WHITE;
+}
+.cmbUser .combo-box-popup .list-cell:hover {
+    -fx-text-fill: #001b2c;
+    -fx-background-color: #b0e123;
+}
+
+.cmbUser .scroll-bar {
+    -fx-background-color: #00406A;
+}
+
+.cmbUser .arrow {
+    -fx-background-color: WHITE;
+}
+
+.cmbUser .list-cell:selected{
+   -fx-text-fill: WHITE;
+}
+
+.btnUserSearch {
+	-fx-alignment: baseline-center;
+	-fx-pref-height: 50.0;
+	-fx-pref-width: 200.0; 
+	-fx-text-fill: #001b2c;
+	-fx-font-size: 14pt;
+	-fx-font-weight: bold;
+	-fx-background-color: #b0e123;
+	-fx-background-radius: 10.0;
+}
+
+.btnUserSearch:hover {
+	-fx-background-color: #001b2c;
+	-fx-text-fill: #b0e123;
+	-fx-border-color: #b0e123;
+	-fx-border-width: 2.0;
+	-fx-border-radius: 10.0;
+	-fx-cursor: hand;
+}
+
+.btnUserSearch:pressed {
+	-fx-background-color : #002F4D;
+}
+
+.tableUser {
+	-fx-pref-height: 645.0;
+	-fx-pref-width: 589.0;
+	-fx-text-fill: WHITE;
+	-fx-background-color: #00406A;
+}
+
+.tableUser-row {
+	-fx-pref-width: 147.0;	
+	-fx-text-fill: WHITE;
+}
+
+.tableUser-row:odd {
+	-fx-background-color: #00406A;
+}
+
+.tableUser-row:even {
+	-fx-background-color: #003355;
+}
+
+.tableUser .column-header *{
+	-fx-background-color: #00406A;
+}
+
+.tableUser .column-header .label {
+    -fx-text-fill: WHITE;
+}
+
+.tableUser .column-header .arrow {
+    -fx-background-color: WHITE;
+}
+
+.tableUser .scroll-bar {
+    -fx-background-color: #00406A;
+}
+
+.tableUser .scroll-bar .thumb {
+    -fx-background-color: WHITE;
+}
+
+.tableUser .column-header-background .filler {
+ 	-fx-background-color: #00406A;
+}
+
+
+/* 
+ * PANE ADMIN LOGIN
+ */
+.check-box .box {
+	-fx-background-color: #b0e123;
+    -fx-background-radius: 12px;
+    -fx-padding: 5px;
+}
+
+.check-box > .box > .mark {
+    -fx-padding: 10px;
+}
+
+.check-box:selected .mark {
+	-fx-background-color: #00406A;
+}
+
+
+/* 
+ * PANE ADMIN
+ */
+.tableAdmin {
+	-fx-pref-height: 350.0;
+	-fx-pref-width: 720.0;	
+	-fx-text-fill: WHITE;
+	-fx-background-color: #00406A;
+}
+
+.tableAdminRowIDs {
+	-fx-min-width: 50.0;
+	-fx-pref-width: 75.0;	
+	-fx-max-width: 75.0;
+}
+
+.tableAdminRowOthers {
+	-fx-min-width: 100.0;
+	-fx-pref-width: 120.0;	
+	-fx-max-width: 120.0;
+}
+
+.tableAdminActions {
+	-fx-min-width: 50.0;
+	-fx-pref-width: 75.0;	
+	-fx-max-width: 75.0;
+	-fx-alignment: baseline-center;
+}
+
+.tableAdmin-row {
+	-fx-text-fill: WHITE;
+}
+
+.tableAdmin-row:odd {
+	-fx-background-color: #00406A;
+}
+
+.tableAdmin-row:even {
+	-fx-background-color: #003355;
+}
+
+.tableAdmin .column-header *{
+	-fx-background-color: #00406A;
+}
+
+.tableAdmin .column-header .label {
+    -fx-text-fill: WHITE;
+}
+
+.tableAdmin .column-header .arrow {
+    -fx-background-color: WHITE;
+}
+
+.tableAdmin .scroll-bar {
+    -fx-background-color: #00406A;
+}
+
+.tableAdmin .column-header-background .filler {
+ 	-fx-background-color: #00406A;
+}
+
+.adminBtns {
+	-fx-alignment: baseline-center;
+	-fx-pref-height: 40.0;
+	-fx-pref-width: 160.0; 
+	-fx-font-size: 12pt;
+	-fx-font-weight: bold;
+	-fx-background-color: #b0e123;
+	-fx-background-radius: 10.0;
+	-fx-text-fill: #001b2c;
+}
+
+.adminBtns:hover {
+	-fx-background-color: #001b2c;
+	-fx-text-fill: #b0e123;
+	-fx-border-color: #b0e123;
+	-fx-border-width: 2.0;
+	-fx-border-radius: 10.0;
+	-fx-cursor: hand;
+}
+
+.adminBtns:pressed {
+	-fx-background-color : #002F4D;
+}
+
+.labelsAdmin {
+	-fx-alignment: baseline-left;
+	-fx-pref-height: 30.0;
+	-fx-pref-width: 150.0; 
+	-fx-text-fill: WHITE;
+	-fx-font-size: 12pt;
+	-fx-font-weight: bold;
+}
+
+.textFieldID {
+	-fx-alignment: baseline-left;
+	-fx-pref-height: 30.0;
+	-fx-pref-width: 100.0; 
+	-fx-text-fill: WHITE;
+	-fx-background-color: #00406A;
+	-fx-font-size: 12pt;
+}
+
+.textFieldID:focused {
+	-fx-effect: dropshadow(three-pass-box, rgb(176, 225, 35), 6, 0.6, 0, 0);
+}
+
+.textFiledName {
+	-fx-alignment: baseline-left;
+	-fx-pref-height: 30.0;
+	-fx-pref-width: 120.0;
+	-fx-background-color: #00406A;
+	-fx-text-fill: WHITE;
+	-fx-font-size: 12pt;
+}
+
+.textFiledName:focused {
+	-fx-effect: dropshadow(three-pass-box, rgb(176, 225, 35), 6, 0.6, 0, 0);
+}
+
+.textFieldAdmin {
+	-fx-alignment: baseline-left;
+	-fx-pref-height: 30.0;
+	-fx-pref-width: 150.0; 
+	-fx-text-fill: WHITE;
+	-fx-background-color: #00406A;
+	-fx-font-size: 12pt;
+}
+
+.textFieldAdmin:focused {
+	-fx-effect: dropshadow(three-pass-box, rgb(176, 225, 35), 6, 0.6, 0, 0);
+}
+
+.cmbAdmin {
+	-fx-alignment: baseline-left;
+	-fx-pref-height: 30.0;
+	-fx-pref-width: 150.0; 
+	-fx-text-fill: WHITE;
+	-fx-background-color: #00406A;
+	-fx-font-size: 12pt;
+	-fx-cursor: hand;
+}
+
+.cmbAdmin .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell {
+    -fx-background-color: #00406A;
+    -fx-text-fill: WHITE;
+}
+.cmbAdmin .combo-box-popup .list-cell:hover {
+    -fx-text-fill: #001b2c;
+    -fx-background-color: #b0e123;
+	-fx-cursor: hand;
+}
+
+.cmbAdmin .scroll-bar {
+    -fx-background-color: #00406A;
+}
+
+.cmbAdmin .arrow {
+    -fx-background-color: WHITE;
+}
+
+.cmbAdmin .list-cell:selected{
+   -fx-text-fill: WHITE;
+}
+
+.radio-button .dot {
+    -fx-background-radius: 12px;
+    -fx-padding: 6px;
+}
+
+.radio-button:hover {
+    -fx-cursor: hand;
+}
+
+.radio-button .radio{
+	-fx-background-color: #b0e123;
+}
+
+.radio-button:selected .radio {
+	-fx-background-color: #b0e123;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: #00406A;
+    -fx-background-insets: 0.0;
+}
+
+.tableControlBtns {
+	-fx-background-color: #b0e123;
+	-fx-background-radius: 10.0;
+	-fx-text-fill: #001b2c;
+	-fx-font-size: 8pt;
+	-fx-font-weight: bold;
+}
+
+.tableControlBtns:hover {
+	-fx-background-color: #001b2c;
+	-fx-text-fill: #b0e123;
+	-fx-border-radius: 10.0;
+	-fx-cursor: hand;
+}
+
+.tableControlBtns:pressed {
+	-fx-background-color : #002F4D;
+}
+
+.exportPdfExcel {
+	-fx-alignment: baseline-center;
+	-fx-pref-height: 70.0;
+	-fx-pref-width: 70.0; 
+	-fx-font-size: 12pt;
+	-fx-font-weight: bold;
+	-fx-background-color: #b0e123;
+	-fx-background-radius: 10.0;
+}
+
+.exportPDF {
+	-fx-background-image: url(/images/imgPdf.png);
+	-fx-background-size: 60px 60px; 
+    -fx-background-repeat: no-repeat; 
+    -fx-background-position: center; 
+}
+
+.exportPDF:hover {
+	-fx-background-color: #001b2c;
+	-fx-cursor: hand;
+	-fx-background-image: url(/images/imgPdfHover.png);
+	-fx-background-size: 60px 60px; 
+    -fx-background-repeat: no-repeat; 
+    -fx-background-position: center; 
+}
+
+.exportPdfExcel:pressed {
+	-fx-background-color : #002F4D;
+}
+
+.exportEXCEL {
+	-fx-background-image: url(/images/imgExcel.png);
+	-fx-background-size: 60px 60px; 
+    -fx-background-repeat: no-repeat; 
+    -fx-background-position: center; 
+}
+
+.exportEXCEL:hover {
+	-fx-background-color: #001b2c;
+	-fx-cursor: hand;
+	-fx-background-image: url(/images/imgExcelHover.png);
+	-fx-background-size: 60px 60px; 
+    -fx-background-repeat: no-repeat; 
+    -fx-background-position: center; 
+}

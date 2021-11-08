@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1030.0" style="-fx-background-color: #1D3E5E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerAdmin">
+	<Pane layoutX="0.0" styleClass="panes" stylesheets="@../css/style.css">
+               <children>
+                  <TableView fx:id="tableAdmin" layoutX="20.0" layoutY="349.0" prefHeight="720.0" prefWidth="1030.0" styleClass="tableAdmin" stylesheets="@../css/style.css">
+                     <columns>
+                        <TableColumn fx:id="colAdminID" prefWidth="75.0" resizable="false" text="ID">
+                           <styleClass>
+                              <String fx:value="tableAdminRowIDs" />
+                              <String fx:value="tableAdmin-row" />
+                           </styleClass></TableColumn>
+                        <TableColumn fx:id="colAdminName" prefWidth="75.0" text="NAME">
+                           <styleClass>
+                              <String fx:value="tableAdminRowOthers" />
+                              <String fx:value="tableAdmin-row" />
+                           </styleClass></TableColumn>
+                        <TableColumn fx:id="colAdminSurname" prefWidth="75.0" text="SURNAME">
+                           <styleClass>
+                              <String fx:value="tableAdminRowOthers" />
+                              <String fx:value="tableAdmin-row" />
+                           </styleClass></TableColumn>
+                        <TableColumn fx:id="colAdminCity" prefWidth="75.0" text="CITY">
+                           <styleClass>
+                              <String fx:value="tableAdminRowOthers" />
+                              <String fx:value="tableAdmin-row" />
+                           </styleClass></TableColumn>
+                        <TableColumn fx:id="colAdminPhone" prefWidth="75.0" text="PHONE">
+                           <styleClass>
+                              <String fx:value="tableAdminRowOthers" />
+                              <String fx:value="tableAdmin-row" />
+                           </styleClass></TableColumn>
+                        <TableColumn fx:id="colAdminEdit" prefWidth="75.0" text="EDIT">
+                           <styleClass>
+                              <String fx:value="tableAdminActions" />
+                              <String fx:value="tableAdmin-row" />
+                           </styleClass></TableColumn>
+                        <TableColumn fx:id="colAdminDelete" prefWidth="75.0" text="DELETE">
+                           <styleClass>
+                              <String fx:value="tableAdminActions" />
+                              <String fx:value="tableAdmin-row" />
+                           </styleClass></TableColumn>
+                     </columns>
+                  </TableView>
+                  <Button fx:id="btnAdminFillTable" layoutX="18.0" layoutY="285.0" onAction="#fillTable" styleClass="adminBtns" stylesheets="@../css/style.css" text="FILL TABLE" />
+                  <Label layoutX="20.0" layoutY="20.0" styleClass="labelsAdmin" stylesheets="@../css/style.css" text="ID" />
+                  <TextField fx:id="txtAdminID" layoutX="20.0" layoutY="50.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="textFieldID" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </TextField>
+                  <Label layoutX="150.0" layoutY="20.0" styleClass="labelsAdmin" stylesheets="@../css/style.css" text="NAME" />
+                  <TextField fx:id="txtAdminName" layoutX="150.0" layoutY="50.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="textFiledName" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </TextField>
+                  <Label layoutX="300.0" layoutY="20.0" styleClass="labelsAdmin" stylesheets="@../css/style.css" text="SURNAME" />
+                  <TextField fx:id="txtAdminSurname" layoutX="300.0" layoutY="50.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="textFieldAdmin" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </TextField>
+                  <Label layoutX="480.0" layoutY="20.0" styleClass="labelsAdmin" stylesheets="@../css/style.css" text="NEW CITY" />
+                  <TextField fx:id="txtAdminCity" layoutX="480.0" layoutY="50.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="textFieldAdmin" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </TextField>
+                  <RadioButton fx:id="newCityRB" layoutX="640.0" layoutY="59.0" mnemonicParsing="false" selected="true" stylesheets="@../css/style.css">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="groupAdminRB" />
+                     </toggleGroup>
+                     <styleClass>
+                        <String fx:value="txtFieldsOnFocus" />
+                        <String fx:value="radio-button" />
+                     </styleClass></RadioButton>
+                  <Label layoutX="480.0" layoutY="100.0" styleClass="labelsAdmin" stylesheets="@../css/style.css" text="SELECT CITY" />
+                  <ComboBox fx:id="cmbAdminCity" layoutX="480.0" layoutY="130.0" prefWidth="150.0" stylesheets="@../css/style.css" visibleRowCount="5">
+                     <styleClass>
+                        <String fx:value="cmbAdmin" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </ComboBox>
+                  <RadioButton fx:id="selectCityRB" layoutX="640.0" layoutY="139.0" mnemonicParsing="false" onAction="#fillAdminCMB" stylesheets="@../css/style.css" toggleGroup="$groupAdminRB">
+                     <styleClass>
+                        <String fx:value="txtFieldsOnFocus" />
+                        <String fx:value="radio-button" />
+                     </styleClass></RadioButton>
+                  <Label layoutX="680.0" layoutY="20.0" styleClass="labelsAdmin" stylesheets="@../css/style.css" text="PHONE" />
+                  <TextField fx:id="txtAdminPhone" layoutX="680.0" layoutY="50.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="textFieldAdmin" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </TextField>
+                  <Button fx:id="btnAdminAddNew" layoutX="850.0" layoutY="48.0" onAction="#addNewContact" styleClass="adminBtns" stylesheets="@../css/style.css" text="ADD NEW" />
+                  <Button fx:id="btnAdminAddExisting" layoutX="850.0" layoutY="128.0" onAction="#addExistingContact" styleClass="adminBtns" stylesheets="@../css/style.css" text="ADD EXISTING" />
+                  <Button fx:id="btnAdminDeleteCity" layoutX="850.0" layoutY="348.0" onAction="#deleteCity" styleClass="adminBtns" stylesheets="@../css/style.css" text="DELETE CITY" />
+                  <Button fx:id="btnClearFields" layoutX="18.0" layoutY="128.0" onAction="#clearFields" styleClass="adminBtns" stylesheets="@../css/style.css" text="CLEAR FIELDS" />
+                  <Button fx:id="btnAdminSearch" layoutX="295.0" layoutY="128.0" onAction="#adminSearch" styleClass="adminBtns" stylesheets="@../css/style.css" text="SEARCH" />
+                  <Button fx:id="btnAdminLogOut" layoutX="850.0" layoutY="662.0" onAction="#logOut" styleClass="adminBtns" stylesheets="@../css/style.css" text="LOG OUT" />
+                  <Button fx:id="btnPdfExport" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="6.0" layoutX="850.0" layoutY="500.0" onAction="#exportPDF" stylesheets="@../css/style.css" textAlignment="CENTER">
+                     <styleClass>
+                        <String fx:value="exportPdfExcel" />
+                        <String fx:value="exportPDF" />
+                     </styleClass></Button>
+                  <Button fx:id="btnExcelExport" contentDisplay="RIGHT" graphicTextGap="6.0" layoutX="940.0" layoutY="500.0" onAction="#exportExcel" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="exportEXCEL" />
+                        <String fx:value="exportPdfExcel" />
+                     </styleClass></Button>
+               </children>
+            </Pane>
+</AnchorPane>
+

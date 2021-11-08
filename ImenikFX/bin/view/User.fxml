@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1030.0" style="-fx-background-color: #1D3E5E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerUser">
+            <Pane layoutX="0.0" styleClass="panes" stylesheets="@../css/style.css">
+               <children>
+                  <Label layoutX="100.0" layoutY="25.0" styleClass="labelsUser" stylesheets="@../css/style.css" text="ENTER SEARCH DATA" />
+                  <Label layoutX="100.0" layoutY="200.0" styleClass="labelsUser" stylesheets="@../css/style.css" text="SEARCH BY" />
+                  <TextField fx:id="txtUser" layoutX="100.0" layoutY="75.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="textFieldUser" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </TextField>
+                  <ComboBox fx:id="cmbUser" layoutX="100.0" layoutY="253.0" styleClass="cmbUser" stylesheets="@../css/style.css" visibleRowCount="5">
+                     <styleClass>
+                        <String fx:value="cmbUser" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </ComboBox>
+                  <Button layoutX="100.0" layoutY="550.0" onAction="#userSearch" styleClass="btnUserSearch" stylesheets="@../css/style.css" text="SEARCH" />
+                  <TableView fx:id="tableUser" layoutX="400.0" layoutY="35.0" styleClass="tableUser" stylesheets="@../css/style.css">
+                    <columns>
+                      <TableColumn fx:id="colUserName" prefWidth="75.0" styleClass="tableUser-row" text="NAME" />
+                      <TableColumn fx:id="colUserSurname" prefWidth="75.0" styleClass="tableUser-row" text="SURNAME" />
+                        <TableColumn fx:id="colUserCity" prefWidth="75.0" styleClass="tableUser-row" text="CITY" />
+                        <TableColumn fx:id="colUserPhone" prefWidth="75.0" styleClass="tableUser-row" text="PHONE" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+</AnchorPane>

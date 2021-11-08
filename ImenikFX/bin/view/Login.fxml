@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1030.0" style="-fx-background-color: #1D3E5E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLogin">
+	<Pane layoutX="0.0" prefHeight="200.0" prefWidth="200.0" styleClass="panes" stylesheets="@../css/style.css">
+               <children>
+                  <Label layoutX="450.0" layoutY="305.0" styleClass="labelsAdmin" stylesheets="@../css/style.css" text="Password" />
+                  <TextField fx:id="txtLoginUsername" layoutX="450.0" layoutY="245.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="textFieldAdmin" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </TextField>
+                  <Label layoutX="450.0" layoutY="213.0" styleClass="labelsAdmin" stylesheets="@../css/style.css" text="Username" />
+                  <TextField fx:id="txtLoginShowPass" layoutX="450.0" layoutY="338.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="textFieldAdmin" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                  </TextField>
+                  <PasswordField fx:id="txtLoginPassword" layoutX="450.0" layoutY="338.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="textFieldAdmin" />
+                        <String fx:value="txtFieldsOnFocus" />
+                     </styleClass>
+                   </PasswordField>
+                  <Button fx:id="adminLogin" layoutX="445.0" layoutY="441.0" mnemonicParsing="false" onAction="#adminLogin" styleClass="adminBtns" stylesheets="@../css/style.css" text="LOGIN" />
+                  <CheckBox fx:id="chkPass" layoutX="615.0" layoutY="341.0" mnemonicParsing="false" onAction="#showPass" />
+         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="420.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/imgLoginUsername.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="420.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/imgLoginPassword.png" />
+            </image>
+         </ImageView>
+               </children>
+	</Pane>
+</AnchorPane>
