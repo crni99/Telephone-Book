@@ -602,6 +602,7 @@
 	-fx-text-fill: WHITE;
 	-fx-font-size: 32pt;
 	-fx-font-weight: bold;
+	-fx-font-style: italic; 
 	-fx-font-family: 'Consolas';
  }
  
