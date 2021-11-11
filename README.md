@@ -14,7 +14,7 @@
 ![Admin](https://user-images.githubusercontent.com/89692428/141304507-ce857c82-1df0-40b4-a642-750e1609c1b3.png)
 
 *About*
-![About](https://user-images.githubusercontent.com/89692428/141304538-5abfc7d3-9b45-4de0-88a6-053b129001c8.png)
+![About](https://user-images.githubusercontent.com/89692428/141326473-ed0baf5e-b08f-4268-8eb4-512de7651de3.png)
 
 <hr>
 
