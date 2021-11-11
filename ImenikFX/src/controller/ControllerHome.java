@@ -4,16 +4,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 
 public class ControllerHome {
 	
 	private Functions function = new Functions();
 	private Connection conn;
-	
-	@FXML
-	private Button btnCheckConn;
 
 	
 	// CHECK CONNECTION TO DATABASE

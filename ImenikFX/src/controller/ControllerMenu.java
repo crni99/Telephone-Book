@@ -43,5 +43,9 @@ public class ControllerMenu implements Initializable {
 		loadPane("LOGIN");
 	}
 
+	@FXML
+	private void buttonAbout(ActionEvent event) {
+		loadPane("ABOUT");
+	}
 	
 }

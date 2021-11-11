@@ -131,6 +131,21 @@
 	-fx-background-image: url(/images/imgAdminHover.png);
 }
 
+.buttonMenuAbout {
+	-fx-background-image: url(/images/imgAbout.png);
+	-fx-background-size: 40px 40px; 
+    -fx-background-repeat: no-repeat; 
+    -fx-background-position: 15%;
+}
+
+.buttonMenuAbout:hover {
+	-fx-background-color: #b0e123;
+	-fx-text-fill: #001b2c;
+	-fx-cursor: hand;
+	-fx-background-image: url(/images/imgAboutHover.png);
+}
+
+
 .buttonsMenu:hover {
 	-fx-background-color: #b0e123;
 	-fx-text-fill: #001b2c;
@@ -577,3 +592,48 @@
     -fx-background-repeat: no-repeat; 
     -fx-background-position: center; 
 }
+
+
+/* 
+ * PANE ABOUT
+ */
+ .madeBy {
+ 	-fx-alignment: baseline-left;
+	-fx-text-fill: WHITE;
+	-fx-font-size: 32pt;
+	-fx-font-weight: bold;
+	-fx-font-family: 'Consolas';
+ }
+ 
+ .socialNet {
+ 	-fx-alignment: baseline-left;
+	-fx-text-fill: WHITE;
+	-fx-font-size: 18pt;
+	-fx-font-weight: bold;
+	-fx-font-style: italic; 
+	-fx-font-family: 'Consolas';
+ }
+ 
+ .socialNet:hover {
+ 	-fx-cursor: hand;
+	-fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: WHITE;
+ }
+ 
+ .socialNet:pressed {
+	-fx-background-color : #003355;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
