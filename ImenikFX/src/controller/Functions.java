@@ -21,6 +21,11 @@ public class Functions {
 	private final String userName = "ognjen";
 	private final String password = "ognjen1999";
 	
+	private Alert alert = new Alert(AlertType.INFORMATION);
+	private DialogPane dialogPane = alert.getDialogPane();
+	
+	private FadeTransition fadeTransition = new FadeTransition();
+	
 	// MAKE CONNETION TO DATABASE
 	@SuppressWarnings("deprecation")
 	public void connection() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -46,8 +51,6 @@ public class Functions {
 
 	// MESSAGE SHOW ON SCREEN IN NEW DIALOGS
 	public void message(String text) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		DialogPane dialogPane = alert.getDialogPane();
 		dialogPane.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 		dialogPane.getStyleClass().add("message");
 		dialogPane.setHeaderText(null);
@@ -61,7 +64,6 @@ public class Functions {
 	
 	// WHEN SWITCHING PANE, USE FADE TRANSITION
 	public void fadeInFXML(Pane pane) {
-		FadeTransition fadeTransition = new FadeTransition();
 		fadeTransition.setDuration(Duration.millis(1200));
 		fadeTransition.setNode(pane);
 		fadeTransition.setFromValue(0);
