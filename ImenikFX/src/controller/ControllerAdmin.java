@@ -106,7 +106,6 @@ public class ControllerAdmin implements Initializable {
 	@FXML
 	private void fillAdminCMB() {
 		try {
-			
 			cmbAdminCity.getItems().clear();
 			
 			function.connection();
@@ -117,7 +116,9 @@ public class ControllerAdmin implements Initializable {
 			ResultSet rs = stmt.executeQuery(query);
 			
 			while(rs.next()) {
-				cmbAdminCity.getItems().addAll(rs.getString("mesto")); 
+				if (!(rs.getRow() == 0)) {
+					cmbAdminCity.getItems().addAll(rs.getString("mesto")); 
+				}
 			}
 			cmbAdminCity.getSelectionModel().select(0);
 			stmt.close();
@@ -183,40 +184,47 @@ public class ControllerAdmin implements Initializable {
 				int id_person = 0;
 				int id_address = 0;
 				int id_phone = 0;
-				
-				String queryPerson = "INSERT INTO osoba VALUES (NULL, '"+name+"', '"+surname+"');";
-				PreparedStatement stmt1 = conn.prepareStatement(queryPerson);
-				stmt1.executeUpdate(queryPerson, java.sql.Statement.RETURN_GENERATED_KEYS);
+		
+				String queryPerson = "INSERT INTO osoba(ime, prezime) VALUES(?, ?)";
+				PreparedStatement stmt1 = conn.prepareStatement(queryPerson, java.sql.Statement.RETURN_GENERATED_KEYS);
+				stmt1.setString(1, name);
+				stmt1.setString(2, surname);
+				stmt1.executeUpdate();
 				ResultSet rs1 = stmt1.getGeneratedKeys();
 				if(rs1.next()){
-					id_person=rs1.getInt(1);
+					id_person = rs1.getInt(1);
 				}
 				stmt1.close();
 				
 				if (id_person > 0) {
-					String queryAddress = "INSERT INTO adresa VALUES (NULL, '"+city+"');";
-					PreparedStatement stmt2 = conn.prepareStatement(queryAddress);
-					stmt2.executeUpdate(queryAddress, java.sql.Statement.RETURN_GENERATED_KEYS);
+					String queryAddress = "INSERT INTO adresa(mesto) VALUES(?)";
+					PreparedStatement stmt2 = conn.prepareStatement(queryAddress, java.sql.Statement.RETURN_GENERATED_KEYS);
+					stmt2.setString(1, city);
+					stmt2.executeUpdate();
 					ResultSet rs2 = stmt2.getGeneratedKeys();
 					if(rs2.next()){
-						id_address=rs2.getInt(1);
+						id_address = rs2.getInt(1);
 					}
 					stmt2.close();
 				}
 				if (id_address > 0) {
-					String queryPhone = "INSERT INTO telefon VALUES (NULL, '"+phone+"');";
-					PreparedStatement stmt3 = conn.prepareStatement(queryPhone);
-					stmt3.executeUpdate(queryPhone, java.sql.Statement.RETURN_GENERATED_KEYS);
+					String queryPhone = "INSERT INTO telefon(telefon) VALUES(?)";
+					PreparedStatement stmt3 = conn.prepareStatement(queryPhone, java.sql.Statement.RETURN_GENERATED_KEYS);
+					stmt3.setString(1, phone);
+					stmt3.executeUpdate();
 					ResultSet rs3 = stmt3.getGeneratedKeys();
 					if(rs3.next()){
-						id_phone=rs3.getInt(1);
+						id_phone = rs3.getInt(1);
 					}
 					stmt3.close();
 				}
 				if (id_phone > 0) {
-					String queryConnects = "INSERT INTO povezuje VALUES (NULL, '"+id_person+"', '"+id_address+"', '"+id_phone+"');";
+					String queryConnects = "INSERT INTO povezuje(id_osoba, id_adresa, id_telefon) VALUES(?, ?, ?)";
 					PreparedStatement stmt4 = conn.prepareStatement(queryConnects);
-					stmt4.executeUpdate(queryConnects);
+					stmt4.setInt(1, id_person);
+					stmt4.setInt(2, id_address);
+					stmt4.setInt(3, id_phone);
+					stmt4.executeUpdate();
 					stmt4.close();
 				}
 		} catch (Exception e) {
@@ -235,41 +243,47 @@ public class ControllerAdmin implements Initializable {
 			int id_address = 0;
 			int id_phone = 0;
 			
-			String queryAddress = "SELECT adresa.id FROM adresa WHERE mesto ='"+ existingCity +"'";
+			String queryAddress = "SELECT id FROM adresa WHERE mesto = ?";
 			PreparedStatement stmt1 = conn.prepareStatement(queryAddress);
-			stmt1.execute(queryAddress);
-			ResultSet rs1 = stmt1.getResultSet();
+			stmt1.setString(1, existingCity);
+			ResultSet rs1 = stmt1.executeQuery();
 			if(rs1.next()) {
-				id_address=rs1.getInt(1);
+				id_address = rs1.getInt(1);
 			}
 			stmt1.close();
 			
 			if (id_address > 0) {
-				String queryPerson = "INSERT INTO osoba VALUES (NULL, '"+name+"', '"+surname+"');";
-				PreparedStatement stmt2 = conn.prepareStatement(queryPerson);
-				stmt2.executeUpdate(queryPerson, java.sql.Statement.RETURN_GENERATED_KEYS);
+				String queryPerson = "INSERT INTO osoba(ime, prezime) VALUES(?, ?)";
+				PreparedStatement stmt2 = conn.prepareStatement(queryPerson, java.sql.Statement.RETURN_GENERATED_KEYS);
+				stmt2.setString(1, name);
+				stmt2.setString(2, surname);
+				stmt2.executeUpdate();
 				ResultSet rs2 = stmt2.getGeneratedKeys();
 				if(rs2.next()){
-					id_person=rs2.getInt(1);
+					id_person = rs2.getInt(1);
 				}
 				stmt2.close();
 			}
 			
 			if (id_person > 0) {
-				String queryPhone = "INSERT INTO telefon VALUES (NULL, '"+phone+"');";
-				PreparedStatement stmt3 = conn.prepareStatement(queryPhone);
-				stmt3.executeUpdate(queryPhone, java.sql.Statement.RETURN_GENERATED_KEYS);
+				String queryPhone = "INSERT INTO telefon(telefon) VALUES(?)";
+				PreparedStatement stmt3 = conn.prepareStatement(queryPhone, java.sql.Statement.RETURN_GENERATED_KEYS);
+				stmt3.setString(1, phone);
+				stmt3.executeUpdate();
 				ResultSet rs3 = stmt3.getGeneratedKeys();
 				if(rs3.next()){
-					id_phone=rs3.getInt(1);
+					id_phone = rs3.getInt(1);
 				}
 				stmt3.close();
 			}
 			
 			if (id_phone > 0) {
-				String queryConnects = "INSERT INTO povezuje VALUES (NULL, '"+id_person+"', '"+id_address+"', '"+id_phone+"');";
+				String queryConnects = "INSERT INTO povezuje(id_osoba, id_adresa, id_telefon) VALUES(?, ?, ?)";
 				PreparedStatement stmt4 = conn.prepareStatement(queryConnects);
-				stmt4.executeUpdate(queryConnects);
+				stmt4.setInt(1, id_person);
+				stmt4.setInt(2, id_address);
+				stmt4.setInt(3, id_phone);
+				stmt4.executeUpdate();
 				stmt4.close();
 			}
 		} catch (Exception e) {
@@ -331,19 +345,20 @@ public class ControllerAdmin implements Initializable {
 			int id_address = 0;
 			int id_phone = 0;
 			
-			String queryPerson = "SELECT osoba.id FROM osoba WHERE id ='"+ id +"'";
+			String queryPerson = "SELECT id FROM osoba WHERE id = ?";
 			PreparedStatement stmt1 = conn.prepareStatement(queryPerson);
-			stmt1.execute(queryPerson);
-			ResultSet rs1 = stmt1.getResultSet();
+			stmt1.setInt(1, id);
+			ResultSet rs1 = stmt1.executeQuery();
 			if(rs1.next()) {
 				id_person=rs1.getInt(1);
 			}
 			stmt1.close();
 			
 			if (id_person > 0) {
-				String queryAddress = "INSERT INTO adresa VALUES (NULL, '"+city+"');";
-				PreparedStatement stmt2 = conn.prepareStatement(queryAddress);
-				stmt2.executeUpdate(queryAddress, java.sql.Statement.RETURN_GENERATED_KEYS);
+				String queryAddress = "INSERT INTO adresa(mesto) VALUES(?)";
+				PreparedStatement stmt2 = conn.prepareStatement(queryAddress, java.sql.Statement.RETURN_GENERATED_KEYS);
+				stmt2.setString(1, city);
+				stmt2.executeUpdate();
 				ResultSet rs2 = stmt2.getGeneratedKeys();
 				if(rs2.next()){
 					id_address=rs2.getInt(1);
@@ -352,9 +367,10 @@ public class ControllerAdmin implements Initializable {
 			}
 			
 			if (id_address > 0) {
-				String queryPhone = "INSERT INTO telefon VALUES (NULL, '"+phone+"');";
-				PreparedStatement stmt3 = conn.prepareStatement(queryPhone);
-				stmt3.executeUpdate(queryPhone, java.sql.Statement.RETURN_GENERATED_KEYS);
+				String queryPhone = "INSERT INTO telefon(telefon) VALUES(?)";
+				PreparedStatement stmt3 = conn.prepareStatement(queryPhone, java.sql.Statement.RETURN_GENERATED_KEYS);
+				stmt3.setString(1, phone);
+				stmt3.executeUpdate();
 				ResultSet rs3 = stmt3.getGeneratedKeys();
 				if(rs3.next()){
 					id_phone=rs3.getInt(1);
@@ -363,9 +379,12 @@ public class ControllerAdmin implements Initializable {
 			}
 			
 			if (id_phone > 0) {
-				String queryConnects = "INSERT INTO povezuje VALUES (NULL, '"+id_person+"', '"+id_address+"', '"+id_phone+"');";
+				String queryConnects = "INSERT INTO povezuje(id_osoba, id_adresa, id_telefon) VALUES(?, ?, ?)";
 				PreparedStatement stmt4 = conn.prepareStatement(queryConnects);
-				stmt4.executeUpdate(queryConnects);
+				stmt4.setInt(1, id_person);
+				stmt4.setInt(2, id_address);
+				stmt4.setInt(3, id_phone);
+				stmt4.executeUpdate();
 				stmt4.close();
 			}
 		} catch (Exception e) {
@@ -383,20 +402,20 @@ public class ControllerAdmin implements Initializable {
 			int id_address = 0;
 			int id_phone = 0;
 			
-			String queryPerson = "SELECT osoba.id FROM osoba WHERE id ='"+ id +"'";
+			String queryPerson = "SELECT id FROM osoba WHERE id = ?";
 			PreparedStatement stmt1 = conn.prepareStatement(queryPerson);
-			stmt1.execute(queryPerson);
-			ResultSet rs1 = stmt1.getResultSet();
+			stmt1.setInt(1, id);
+			ResultSet rs1 = stmt1.executeQuery();
 			if(rs1.next()) {
 				id_person=rs1.getInt(1);
 			}
 			stmt1.close();
 			
 			if (id_person > 0) {
-				String queryAddress = "SELECT adresa.id FROM adresa WHERE mesto ='"+ existingCity +"'";
+				String queryAddress = "SELECT id FROM adresa WHERE mesto = ?";
 				PreparedStatement stmt2 = conn.prepareStatement(queryAddress);
-				stmt2.execute(queryAddress);
-				ResultSet rs2 = stmt2.getResultSet();
+				stmt2.setString(1, existingCity);
+				ResultSet rs2 = stmt2.executeQuery();
 				if(rs2.next()) {
 					id_address=rs2.getInt(1);
 				}
@@ -404,20 +423,24 @@ public class ControllerAdmin implements Initializable {
 			}
 			
 			if (id_address > 0) {
-				String queryPhone = "INSERT INTO telefon VALUES (NULL, '"+phone+"');"; 
-				PreparedStatement stmt3 = conn.prepareStatement(queryPhone);
-				stmt3.executeUpdate(queryPhone, java.sql.Statement.RETURN_GENERATED_KEYS);
+				String queryPhone = "INSERT INTO telefon(telefon) VALUES(?)";
+				PreparedStatement stmt3 = conn.prepareStatement(queryPhone, java.sql.Statement.RETURN_GENERATED_KEYS);
+				stmt3.setString(1, phone);
+				stmt3.executeUpdate();
 				ResultSet rs3 = stmt3.getGeneratedKeys();
 				if(rs3.next()){
-					id_phone=rs3.getInt(1);
+					id_phone = rs3.getInt(1);
 				}
 				stmt3.close();
 			}
 			
 			if (id_phone > 0) {
-				String queryConnects = "INSERT INTO povezuje VALUES (NULL, '"+id_person+"', '"+id_address+"', '"+id_phone+"');";
+				String queryConnects = "INSERT INTO povezuje(id_osoba, id_adresa, id_telefon) VALUES(?, ?, ?)";
 				PreparedStatement stmt4 = conn.prepareStatement(queryConnects);
-				stmt4.executeUpdate(queryConnects);
+				stmt4.setInt(1, id_person);
+				stmt4.setInt(2, id_address);
+				stmt4.setInt(3, id_phone);
+				stmt4.executeUpdate();
 				stmt4.close();
 			}
 		} catch (Exception e) {
@@ -446,18 +469,18 @@ public class ControllerAdmin implements Initializable {
 					int id_city = 0;
 					int countCity = 0;
 					
-					String queryTakeIdCity = "SELECT id FROM adresa WHERE mesto ='"+ city +"'";
+					String queryTakeIdCity = "SELECT id FROM adresa WHERE mesto = ?";
 					PreparedStatement stmt1 = conn.prepareStatement(queryTakeIdCity);
-					stmt1.execute(queryTakeIdCity);
-					ResultSet rs1 = stmt1.getResultSet();
+					stmt1.setString(1, city);
+					ResultSet rs1 = stmt1.executeQuery();
 					if(rs1.next()) {
 						id_city=rs1.getInt(1);
 					}
 					
-					String queryCountCity = "SELECT COUNT(*) FROM povezuje WHERE id_adresa ='"+ id_city +"'";
+					String queryCountCity = "SELECT COUNT(*) FROM povezuje WHERE id_adresa = ?";
 					PreparedStatement stmt2 = conn.prepareStatement(queryCountCity);
-					stmt2.execute(queryCountCity);
-					ResultSet rs2 = stmt2.getResultSet();
+					stmt2.setInt(1, id_city);
+					ResultSet rs2 = stmt2.executeQuery();
 					if(rs2.next()) {
 						countCity=rs2.getInt(1);
 					}
@@ -468,8 +491,9 @@ public class ControllerAdmin implements Initializable {
 						function.message("THE PLACE IS STILL IN USE AND CANNOT BE DELETED!");
 					}
 					else {
-						String queryDeleteCity = "DELETE FROM adresa WHERE id ='"+ id_city +"'";
+						String queryDeleteCity = "DELETE FROM adresa WHERE id = ?";
 						PreparedStatement stmt3 = conn.prepareStatement(queryDeleteCity);
+						stmt3.setInt(1, id_city);
 						stmt3.execute();
 						stmt3.close();
 						function.message("City successfully deleted!");
@@ -502,15 +526,35 @@ public class ControllerAdmin implements Initializable {
 	}
 	
 	
+	// THIS FUNC TAKE QUERY AND EXECUTE
+	private void execQuery(String searchData, String query) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		function.connection();
+		conn = function.getConn();
+		
+		adminList.removeAll(adminList);
+		
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, "%" + searchData + "%");
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			adminList.add(new AdminModelTable(rs.getInt("osoba.id"), rs.getInt("povezuje.id"), rs.getInt("telefon.id"),
+					rs.getString("ime"), rs.getString("prezime"), rs.getString("mesto"), rs.getString("telefon")));
+		}
+		tableAdmin.setItems(adminList);
+		
+		if(adminList.isEmpty()) {
+			function.message("Search data does not exist!");
+		}
+		stmt.close();
+		conn.close();
+	}
+	
+	
 	// CAN BE SEARCHED ONLY BY ONE TYPE AT SAME TIME WITH FIELDS ON TOP OF APP
 	@FXML
 	private void adminSearch() {
 		try {
-			adminList.removeAll(adminList);
-			
-			function.connection();
-			conn = function.getConn();
-			
 			String name = txtAdminName.getText().trim();
 			String surname = txtAdminSurname.getText().trim();
 			String city = txtAdminCity.getText().trim();
@@ -524,71 +568,38 @@ public class ControllerAdmin implements Initializable {
 				String queryName = "SELECT osoba.id, adresa.id, telefon.id, povezuje.id, osoba.ime, osoba.prezime, "
 						+ "adresa.mesto, telefon.telefon, povezuje.id_osoba, povezuje.id_adresa, povezuje.id_telefon FROM "
 						+ "osoba, adresa, telefon, povezuje WHERE osoba.id=povezuje.id_osoba AND adresa.id=povezuje.id_adresa AND "
-						+ "telefon.id=povezuje.id_telefon AND osoba.ime LIKE '%" + name + "%'";
+						+ "telefon.id=povezuje.id_telefon AND osoba.ime LIKE ?";
 				
-				PreparedStatement stmt = conn.prepareStatement(queryName);
-				ResultSet rs = stmt.executeQuery(queryName);
-				
-				while(rs.next()) {
-					adminList.add(new AdminModelTable(rs.getInt("osoba.id"), rs.getInt("povezuje.id"), rs.getInt("telefon.id"),
-							rs.getString("ime"), rs.getString("prezime"), rs.getString("mesto"), rs.getString("telefon")));
-				}
-				tableAdmin.setItems(adminList);
-				stmt.close();
+				execQuery(name, queryName);
 			}
 			else if (name.isEmpty() && !surname.isEmpty() && city.isEmpty() && phone.isEmpty()) {
 				
 				String querySurname = "SELECT osoba.id, adresa.id, telefon.id, povezuje.id, osoba.ime, osoba.prezime, "
 						+ "adresa.mesto, telefon.telefon, povezuje.id_osoba, povezuje.id_adresa, povezuje.id_telefon FROM "
 						+ "osoba, adresa, telefon, povezuje WHERE osoba.id=povezuje.id_osoba AND adresa.id=povezuje.id_adresa AND "
-						+ "telefon.id=povezuje.id_telefon AND osoba.prezime LIKE '%" + surname + "%'";
+						+ "telefon.id=povezuje.id_telefon AND osoba.prezime LIKE ?";
 				
-				PreparedStatement stmt = conn.prepareStatement(querySurname);
-				ResultSet rs = stmt.executeQuery(querySurname);
-				
-				while(rs.next()) {
-					adminList.add(new AdminModelTable(rs.getInt("osoba.id"), rs.getInt("povezuje.id"), rs.getInt("telefon.id"),
-							rs.getString("ime"), rs.getString("prezime"), rs.getString("mesto"), rs.getString("telefon")));
-				}
-				tableAdmin.setItems(adminList);
-				stmt.close();
+				execQuery(surname, querySurname);
 			}
 			else if (name.isEmpty() && surname.isEmpty() && !city.isEmpty() && phone.isEmpty()) {
 				
 				String queryAddress = "SELECT osoba.id, adresa.id, telefon.id, povezuje.id, osoba.ime, osoba.prezime, "
 						+ "adresa.mesto, telefon.telefon, povezuje.id_osoba, povezuje.id_adresa, povezuje.id_telefon FROM "
 						+ "osoba, adresa, telefon, povezuje WHERE osoba.id=povezuje.id_osoba AND adresa.id=povezuje.id_adresa AND "
-						+ "telefon.id=povezuje.id_telefon AND adresa.mesto LIKE '%" + city + "%'";
+						+ "telefon.id=povezuje.id_telefon AND adresa.mesto LIKE ?";
 				
-				PreparedStatement stmt = conn.prepareStatement(queryAddress);
-				ResultSet rs = stmt.executeQuery(queryAddress);
-				
-				while(rs.next()) {
-					adminList.add(new AdminModelTable(rs.getInt("osoba.id"), rs.getInt("povezuje.id"), rs.getInt("telefon.id"),
-							rs.getString("ime"), rs.getString("prezime"), rs.getString("mesto"), rs.getString("telefon")));
-				}
-				tableAdmin.setItems(adminList);
-				stmt.close();
+				execQuery(city, queryAddress);
 			}
 			else if (name.isEmpty() && surname.isEmpty() && city.isEmpty() && !phone.isEmpty()) {
 				
 				String queryPhone = "SELECT osoba.id, adresa.id, telefon.id, povezuje.id, osoba.ime, osoba.prezime, "
 						+ "adresa.mesto, telefon.telefon, povezuje.id_osoba, povezuje.id_adresa, povezuje.id_telefon FROM "
 						+ "osoba, adresa, telefon, povezuje WHERE osoba.id=povezuje.id_osoba AND adresa.id=povezuje.id_adresa AND "
-						+ "telefon.id=povezuje.id_telefon AND telefon.telefon LIKE '%" + phone + "%'";
+						+ "telefon.id=povezuje.id_telefon AND telefon.telefon LIKE ?";
 				
-				PreparedStatement stmt = conn.prepareStatement(queryPhone);
-				ResultSet rs = stmt.executeQuery(queryPhone);
-				
-				while(rs.next()) {
-					adminList.add(new AdminModelTable(rs.getInt("osoba.id"), rs.getInt("povezuje.id"), rs.getInt("telefon.id"),
-							rs.getString("ime"), rs.getString("prezime"), rs.getString("mesto"), rs.getString("telefon")));
-				}
-				tableAdmin.setItems(adminList);
-				stmt.close();
+				execQuery(phone, queryPhone);
 			}
 			adminTableAppearance();
-			conn.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -661,39 +672,45 @@ public class ControllerAdmin implements Initializable {
                             		String dataSurname = null;
                             		String dataPhone = null;
                             		
-                            		String queryFindNameSurname = "SELECT * FROM osoba WHERE id ='"+ tableIdPerson +"'";
+                            		String queryFindNameSurname = "SELECT * FROM osoba WHERE id = ?";
                             		PreparedStatement stmtID = conn.prepareStatement(queryFindNameSurname);
-                            		stmtID.execute(queryFindNameSurname);
-                            		ResultSet rsID = stmtID.getResultSet();
+                            		stmtID.setInt(1, tableIdPerson);
+                            		ResultSet rsID = stmtID.executeQuery();
                 					if(rsID.next()) {
                 						dataName=rsID.getString(2);
                 						dataSurname=rsID.getString(3);
                 					}
+                					stmtID.close();
                 					
-                					String queryFindPhone = "SELECT * FROM telefon WHERE id ='"+ tableIdPhone +"'";
+                					String queryFindPhone = "SELECT * FROM telefon WHERE id = ?";
                 					PreparedStatement stmtFindPhone = conn.prepareStatement(queryFindPhone);
-                					stmtFindPhone.execute(queryFindPhone);
-                            		ResultSet rsPhone = stmtFindPhone.getResultSet();
+                					stmtFindPhone.setInt(1, tableIdPhone);
+                            		ResultSet rsPhone = stmtFindPhone.executeQuery();
                 					if(rsPhone.next()) {
                 						dataPhone=rsPhone.getString(2);
                 					}
-                            		
-                					String querySurname = "UPDATE osoba SET prezime = ? WHERE id ='"+ tableIdPerson +"'";
-                					PreparedStatement stmtSurname = conn.prepareStatement(querySurname);
-                					stmtSurname.setString(1, tableSurname);	
+                					stmtFindPhone.close();
                 					
-                					String queryName = "UPDATE osoba SET ime = ? WHERE id ='"+ tableIdPerson +"'";
+                					String querySurname = "UPDATE osoba SET prezime = ? WHERE id = ?";
+                					PreparedStatement stmtSurname = conn.prepareStatement(querySurname);
+                					stmtSurname.setString(1, tableSurname);
+                					stmtSurname.setInt(2, tableIdPerson);
+                					
+                					String queryName = "UPDATE osoba SET ime = ? WHERE id = ?";
                 					PreparedStatement stmtName = conn.prepareStatement(queryName);
                 					stmtName.setString(1, tableName);
+                					stmtName.setInt(2, tableIdPerson);
                					
-                					String queryNameSurname = "UPDATE osoba SET ime = ? ,prezime = ? WHERE id ='"+ tableIdPerson +"'";
+                					String queryNameSurname = "UPDATE osoba SET ime = ? ,prezime = ? WHERE id = ?";
                 					PreparedStatement stmtNameSurname = conn.prepareStatement(queryNameSurname);
                 					stmtNameSurname.setString(1, tableName);
                 					stmtNameSurname.setString(2, tableSurname);
+                					stmtNameSurname.setInt(3, tableIdPerson);
                 					
-                					String queryPhone = "UPDATE telefon SET telefon = ? WHERE id ='"+ tableIdPhone +"'";
+                					String queryPhone = "UPDATE telefon SET telefon = ? WHERE id = ?";
                 					PreparedStatement stmtPhone = conn.prepareStatement(queryPhone);
                 					stmtPhone.setString(1, tablePhone);
+                					stmtPhone.setInt(2, tableIdPhone);
                 					
                 					if (tableSurname.equals(dataSurname) && tableName.equals(dataName) && tablePhone.equals(dataPhone)) {
                 						function.message("CHANGE AT LEAST ONE INFORAMTION!");
@@ -790,38 +807,41 @@ public class ControllerAdmin implements Initializable {
 							int count = 0;
 							int id_phone = 0;
 							
-							String queryPersons = "SELECT id_osoba FROM povezuje WHERE id ='"+ id_3 +"'";
+							String queryPersons = "SELECT id_osoba FROM povezuje WHERE id = ?";
 							PreparedStatement stmt4 = conn.prepareStatement(queryPersons);
-							stmt4.execute(queryPersons);
-							ResultSet rs4 = stmt4.getResultSet();
+							stmt4.setInt(1, id_3);
+							ResultSet rs4 = stmt4.executeQuery();
 							if(rs4.next()) {
-								id_person=rs4.getInt(1);
+								id_person = rs4.getInt(1);
 							}
 							
-							String queryCountPersons = "SELECT COUNT(*) FROM povezuje WHERE id_osoba ='"+ id_person +"'";
+							String queryCountPersons = "SELECT COUNT(*) FROM povezuje WHERE id_osoba = ?";
 							PreparedStatement stmt5 = conn.prepareStatement(queryCountPersons);
-							stmt5.execute(queryCountPersons);
-							ResultSet rs5 = stmt5.getResultSet();
+							stmt5.setInt(1, id_person);
+							ResultSet rs5 = stmt5.executeQuery();
 							if(rs5.next()) {
-								count=rs5.getInt(1);
+								count = rs5.getInt(1);
 							}
 							
-							String queryFindPhone = "SELECT id_telefon FROM povezuje WHERE id ='"+ id_3 +"'";
+							String queryFindPhone = "SELECT id_telefon FROM povezuje WHERE id = ?";
 							PreparedStatement stmt6 = conn.prepareStatement(queryFindPhone);
-							stmt6.execute(queryFindPhone);
-							ResultSet rs6 = stmt6.getResultSet();
+							stmt6.setInt(1, id_3);
+							ResultSet rs6 = stmt6.executeQuery();
 							if(rs6.next()) {
-								id_phone=rs6.getInt(1);
+								id_phone = rs6.getInt(1);
 							}
 							
-							String queryConnects = "DELETE FROM povezuje WHERE id ='"+ id_3 +"'";
+							String queryConnects = "DELETE FROM povezuje WHERE id = ?";
 							PreparedStatement stmt1 = conn.prepareStatement(queryConnects);
+							stmt1.setInt(1, id_3);
 							
-							String queryPhone = "DELETE FROM telefon WHERE id ='"+ id_phone +"'";
+							String queryPhone = "DELETE FROM telefon WHERE id = ?";
 							PreparedStatement stmt2 = conn.prepareStatement(queryPhone);
+							stmt2.setInt(1, id_phone);
 							
-							String queryPerson = "DELETE FROM osoba WHERE id ='"+ id_person +"'";
+							String queryPerson = "DELETE FROM osoba WHERE id = ?";
 							PreparedStatement stmt3 = conn.prepareStatement(queryPerson);
+							stmt3.setInt(1, id_person);
 							
 							if (count == 1) {
 								stmt2.execute();

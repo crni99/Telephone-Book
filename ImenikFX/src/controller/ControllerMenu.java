@@ -16,6 +16,8 @@ public class ControllerMenu implements Initializable {
 	@FXML
 	private BorderPane mainPane;
 	
+	
+	// LOAD PANE/SCREEN DEPENDING ON THE SCREEN/BUTTON NAME
 	private void loadPane(String buttonName) {
 		FxmlLoader fxml = new FxmlLoader();
 		Pane view = fxml.getPage(buttonName);

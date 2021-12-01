@@ -55,10 +55,10 @@ public class ControllerLogin {
 				function.connection();
 				conn = function.getConn();
 				
-				String queryUsername = "SELECT * FROM prijava WHERE username ='"+ username +"'";
+				String queryUsername = "SELECT * FROM prijava WHERE username = ?";
 				PreparedStatement stmt = conn.prepareStatement(queryUsername);
-				stmt.execute(queryUsername);
-				ResultSet rs = stmt.getResultSet();
+				stmt.setString(1, username);
+				ResultSet rs = stmt.executeQuery();
 				while(rs.next()) {
 					pass = rs.getString("password");
 				}

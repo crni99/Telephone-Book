@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -41,133 +42,92 @@ public class ControllerUser implements Initializable {
 	private ObservableList<UserModelTable> userList = FXCollections.observableArrayList();
 	
 	
-	@FXML
-	private void userSearch() {
+	// THIS FUNC TAKE QUERY AND EXECUTE
+	private void execQuery(String searchData, String query) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		try {
 			function.connection();
 			conn = function.getConn();
 			
 			userList.removeAll(userList);
 			
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, "%" + searchData + "%");
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				userList.add(new UserModelTable(rs.getString("ime"), rs.getString("prezime"), 
+						rs.getString("mesto"), rs.getString("telefon")));
+			}
+			colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
+			colUserSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+			colUserCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+			colUserPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+			tableUser.setItems(userList);
+			
+			if(userList.isEmpty()) {
+				function.message("Search data does not exist!");
+			}
+			stmt.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	// TAKE DATA FROM COMBO BOX, THEN EXEC QUERY DEPENDING ON THE SELECTED VALUE
+	@FXML
+	private void userSearch() {
+		try {
+			
 			String txtData = txtUser.getText().trim();
 			String cmbData = cmbUser.getValue();
 			
-			if (txtData.isEmpty()) {
-				function.message("The field cannot be empty!");
+			if (txtData.isEmpty() || cmbData.isEmpty()) {
+				function.message("The field is empty or value is not selected!");
 			}
 			else if(cmbData.equals("NAME")) {
 				
 				String queryName = "SELECT osoba.id, adresa.id, telefon.id, povezuje.id, osoba.ime, osoba.prezime, "
 						+ "adresa.mesto, telefon.telefon, povezuje.id_osoba, povezuje.id_adresa, povezuje.id_telefon FROM "
 						+ "osoba, adresa, telefon, povezuje WHERE osoba.id=povezuje.id_osoba AND adresa.id=povezuje.id_adresa AND "
-						+ "telefon.id=povezuje.id_telefon AND osoba.ime LIKE '%" + txtData + "%'";
+						+ "telefon.id=povezuje.id_telefon AND osoba.ime LIKE ?";
 				
-				PreparedStatement stmt = conn.prepareStatement(queryName);
-				ResultSet rs = stmt.executeQuery(queryName);
-				
-				while(rs.next()) {
-					userList.add(new UserModelTable(rs.getString("ime"), rs.getString("prezime"), 
-							rs.getString("mesto"), rs.getString("telefon")));
-				}
-				colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
-				colUserSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
-				colUserCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-				colUserPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-				
-				tableUser.setItems(userList);
-				stmt.close();
-				
-				if(userList.isEmpty()) {
-					function.message("Search data does not exist!");
-				}
+				execQuery(txtData, queryName);
 			}
-			
 			else if(cmbData.equals("SURNAME")) {
 			
 				String querySurname = "SELECT osoba.id, adresa.id, telefon.id, povezuje.id, osoba.ime, osoba.prezime, "
 					+ "adresa.mesto, telefon.telefon, povezuje.id_osoba, povezuje.id_adresa, povezuje.id_telefon FROM "
 					+ "osoba, adresa, telefon, povezuje WHERE osoba.id=povezuje.id_osoba AND adresa.id=povezuje.id_adresa AND "
-					+ "telefon.id=povezuje.id_telefon AND osoba.prezime LIKE '%" + txtData + "%'";
+					+ "telefon.id=povezuje.id_telefon AND osoba.prezime LIKE ?";
 				
-				PreparedStatement stmt = conn.prepareStatement(querySurname);
-				ResultSet rs = stmt.executeQuery(querySurname);
-				
-				while(rs.next()) {
-					userList.add(new UserModelTable(rs.getString("ime"), rs.getString("prezime"), 
-							rs.getString("mesto"), rs.getString("telefon")));
-				}
-				colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
-				colUserSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
-				colUserCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-				colUserPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-				
-				tableUser.setItems(userList);
-				stmt.close();
-				
-				if(userList.isEmpty()) {
-					function.message("Search data does not exist!");
-				}
+				execQuery(txtData, querySurname);
 			}
 			else if(cmbData.equals("CITY")) {
 			
 				String queryCity = "SELECT osoba.id, adresa.id, telefon.id, povezuje.id, osoba.ime, osoba.prezime, "
 					+ "adresa.mesto, telefon.telefon, povezuje.id_osoba, povezuje.id_adresa, povezuje.id_telefon FROM "
 					+ "osoba, adresa, telefon, povezuje WHERE osoba.id=povezuje.id_osoba AND adresa.id=povezuje.id_adresa AND "
-					+ "telefon.id=povezuje.id_telefon AND adresa.mesto LIKE '%" + txtData + "%'";
+					+ "telefon.id=povezuje.id_telefon AND adresa.mesto LIKE ?";
 				
-				PreparedStatement stmt = conn.prepareStatement(queryCity);
-				ResultSet rs = stmt.executeQuery(queryCity);
-				
-				while(rs.next()) {
-					userList.add(new UserModelTable(rs.getString("ime"), rs.getString("prezime"), 
-							rs.getString("mesto"), rs.getString("telefon")));
-				}
-				colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
-				colUserSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
-				colUserCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-				colUserPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-				
-				tableUser.setItems(userList);
-				stmt.close();
-				
-				if(userList.isEmpty()) {
-					function.message("Search data does not exist!");
-				}
+				execQuery(txtData, queryCity);
 			}
 			else if(cmbData.equals("PHONE")) {
 			
 				String queryPhone = "SELECT osoba.id, adresa.id, telefon.id, povezuje.id, osoba.ime, osoba.prezime, "
 					+ "adresa.mesto, telefon.telefon, povezuje.id_osoba, povezuje.id_adresa, povezuje.id_telefon FROM "
 					+ "osoba, adresa, telefon, povezuje WHERE osoba.id=povezuje.id_osoba AND adresa.id=povezuje.id_adresa AND "
-					+ "telefon.id=povezuje.id_telefon AND telefon.telefon LIKE '%" + txtData + "%'";
+					+ "telefon.id=povezuje.id_telefon AND telefon.telefon LIKE ?";
 				
-				PreparedStatement stmt = conn.prepareStatement(queryPhone);
-				ResultSet rs = stmt.executeQuery(queryPhone);
-				
-				while(rs.next()) {
-					userList.add(new UserModelTable(rs.getString("ime"), rs.getString("prezime"), 
-							rs.getString("mesto"), rs.getString("telefon")));
-				}
-				colUserName.setCellValueFactory(new PropertyValueFactory<>("name"));
-				colUserSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
-				colUserCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-				colUserPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-				
-				tableUser.setItems(userList);
-				stmt.close();
-				
-				if(userList.isEmpty()) {
-					function.message("Search data does not exist!");
-				}
+				execQuery(txtData, queryPhone);
 			}
-			conn.close();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	
 
 	// POPULATING COMBOBOX USER
 	@Override
