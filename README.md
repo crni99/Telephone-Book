@@ -1,5 +1,9 @@
 # Telephone / Contact Book
 
+**The program was typed in Java (JavaFX) and CSS was used for the layout. I used MySQL for the database. This is a program where users can perform search operations, based on name, surname, city, or phone. Admin needs to login to perform CRUD operations (create, read, update, and delete). Admin can export table view to PDF or EXCEL.**
+</br>
+## Screenshots
+
 *Home*
 ![Home](https://user-images.githubusercontent.com/89692428/141304452-43f879cd-13a8-4d39-ae6c-eb4193813e3a.png)
 
