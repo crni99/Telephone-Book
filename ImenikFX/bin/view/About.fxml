@@ -11,7 +11,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1030.0" style="-fx-background-color: #1D3E5E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerAbout">
    <Pane layoutX="0.0" styleClass="panes" stylesheets="@../css/style.css">
                <children>
-         <FlowPane alignment="CENTER" hgap="25.0" prefHeight="240.0" prefWidth="1030.0">
+         <FlowPane alignment="CENTER" hgap="25.0" layoutY="135.0" prefHeight="240.0" prefWidth="1030.0">
             <children>
                <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -24,7 +24,7 @@
                <Label styleClass="madeBy" text="Ognjen Anđelić" />
             </children>
          </FlowPane>
-         <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="25.0" layoutY="210.0" prefHeight="120.0" prefWidth="1030.0">
+         <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="25.0" layoutY="345.0" prefHeight="120.0" prefWidth="1030.0">
             <children>
                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -34,7 +34,7 @@
                <Label fx:id="labelEmail" onMouseClicked="#emailCopy" styleClass="socialNet" text="andjelicb.ognjen@gmail.com" />
             </children>
          </FlowPane>
-         <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="25.0" layoutY="330.0" prefHeight="120.0" prefWidth="1030.0">
+         <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="25.0" layoutY="465.0" prefHeight="120.0" prefWidth="1030.0">
             <children>
                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -45,32 +45,6 @@
                   </FlowPane.margin>
                </ImageView>
                <Label fx:id="labelGithub" onMouseClicked="#githubCopy" styleClass="socialNet" text="github.com/crni99" />
-            </children>
-         </FlowPane>
-         <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="25.0" layoutY="450.0" prefHeight="120.0" prefWidth="1030.0">
-            <children>
-               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/imgInstagram.png" />
-                  </image>
-                  <FlowPane.margin>
-                     <Insets left="-65.0" />
-                  </FlowPane.margin>
-               </ImageView>
-               <Label fx:id="labelInstagram" onMouseClicked="#instagramCopy" styleClass="socialNet" text="instagram.com/crni_99" />
-            </children>
-         </FlowPane>
-         <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="25.0" layoutY="570.0" prefHeight="120.0" prefWidth="1030.0">
-            <children>
-               <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/imgFacebook.png" />
-                  </image>
-                  <FlowPane.margin>
-                     <Insets left="-90.0" />
-                  </FlowPane.margin>
-               </ImageView>
-               <Label fx:id="labelFacebook" onMouseClicked="#facebookCopy" styleClass="socialNet" text="facebook.com/crni99" />
             </children>
          </FlowPane>
                </children>

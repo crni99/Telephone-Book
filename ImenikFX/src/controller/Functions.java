@@ -11,45 +11,40 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-
 public class Functions {
-	
+
 	private Connection conn;
 	private final String url = "jdbc:mysql://localhost:3306/";
 	private final String dbName = "imenik_eng";
 	private final String driver = "com.mysql.cj.jdbc.Driver";
 	private final String userName = "ognjen";
 	private final String password = "ognjen1999";
-	
+
 	private Alert alert = new Alert(AlertType.INFORMATION);
 	private DialogPane dialogPane = alert.getDialogPane();
-	
+
 	private FadeTransition fadeTransition = new FadeTransition();
-	
-	// MAKE CONNETION TO DATABASE
-	@SuppressWarnings("deprecation")
-	public void connection() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+	// MAKE A CONNECTION TO THE DATABASE
+	public void connection()
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		try {
-			Class.forName(driver).newInstance();
-			conn = DriverManager.getConnection(url+dbName,userName,password);
-			
+			Object newInstance = Class.forName(driver).newInstance();
+			conn = DriverManager.getConnection(url + dbName, userName, password);
+
 			if (conn == null) {
-				conn.close();
 				message("CONNECTION FAILURE!");
-	        }
-			
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 
 	public Connection getConn() {
 		return conn;
 	}
 
-
-	// MESSAGE SHOW ON SCREEN IN NEW DIALOGS
+	// MESSAGE SHOW ON SCREEN IN NEW DIALOGUE
 	public void message(String text) {
 		dialogPane.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 		dialogPane.getStyleClass().add("message");
@@ -60,8 +55,7 @@ public class Functions {
 		alert.setContentText(text);
 		alert.showAndWait();
 	}
-	
-	
+
 	// WHEN SWITCHING PANE, USE FADE TRANSITION
 	public void fadeInFXML(Pane pane) {
 		fadeTransition.setDuration(Duration.millis(1200));
@@ -70,5 +64,4 @@ public class Functions {
 		fadeTransition.setToValue(1);
 		fadeTransition.play();
 	}
-
 }
