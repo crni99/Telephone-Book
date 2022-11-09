@@ -16,9 +16,6 @@
 *Admin*
 ![Admin](https://user-images.githubusercontent.com/89692428/141304507-ce857c82-1df0-40b4-a642-750e1609c1b3.png)
 
-*About*
-![About](https://user-images.githubusercontent.com/89692428/141326473-ed0baf5e-b08f-4268-8eb4-512de7651de3.png)
-
 <hr>
 
 ### To run this java program, you must pass arguments to VM or command prompt.
